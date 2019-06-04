@@ -4,6 +4,8 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 
 import 'command/major_command.dart';
+import 'command/minor_command.dart';
+import 'command/patch_command.dart';
 import 'util.dart';
 import 'version.dart';
 
@@ -16,6 +18,8 @@ class _CommandRunner extends CommandRunner<int> {
     argParser.addFlag('version',
         negatable: false, help: 'Prints the version of pubversion.');
     addCommand(MajorCommand());
+    addCommand(MinorCommand());
+    addCommand(PatchCommand());
   }
 
   @override

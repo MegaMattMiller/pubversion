@@ -5,17 +5,17 @@ import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 
-class MajorCommand extends Command<int> {
+class MinorCommand extends Command<int> {
   @override
   final argParser = ArgParser(usageLineLength: 80);
 
   @override
-  final name = 'major';
+  final name = 'minor';
 
   @override
-  final description = 'Imcrement major version number.';
+  final description = 'Imcrement minor version number.';
 
-  MajorCommand();
+  MinorCommand();
 
   @override
   Future<int> run() async {
@@ -31,14 +31,14 @@ class MajorCommand extends Command<int> {
     final file = new File('pubspec.yaml');
     String contents = await file.readAsString();
     Pubspec currentPubspec = new Pubspec.parse(contents);
-    Version nextMajorVersion =
-        new Version.parse(currentPubspec.version.nextMajor.toString());
+    Version nextMinorVersion =
+        new Version.parse(currentPubspec.version.nextMinor.toString());
 
     List<String> lines = await file.readAsLines();
     List<String> outputLines = new List<String>();
     for (String line in lines) {
       if (line.startsWith("version:")) {
-        outputLines.add("version: ${nextMajorVersion}");
+        outputLines.add("version: ${nextMinorVersion}");
       } else {
         outputLines.add(line);
       }

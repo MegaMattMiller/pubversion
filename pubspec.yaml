@@ -1,5 +1,6 @@
 name: pubversion
-version: 0.0.1
+description: A package to easily increment versin numbers in pubspec.yaml files.
+version: 1.0.0-rc.1
 authors:
 - Matt miller <matt@mattmiller.dev>
 homepage: https://github.com/MegaMattMiller/pubversion
