@@ -1,4 +1,5 @@
-[![Pub Package](https://img.shields.io/pub/v/webdev.svg)](https://pub.dartlang.org/packages/pubversion)
+[![Pub Package](https://img.shields.io/pub/v/pubversion.svg)](https://pub.dartlang.org/packages/pubversion)
+[![Build Status](https://travis-ci.org/MegaMattMiller/pubversion.svg?branch=master)](https://travis-ci.org/MegaMattMiller/pubversion)
 
 A command-line tool for easily incrementing pubspec.yaml version numbers.
 
