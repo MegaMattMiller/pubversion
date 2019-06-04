@@ -47,7 +47,7 @@ class MajorCommand extends Command<int> {
     List<String> lines = await file.readAsLines();
     List<String> outputLines = new List<String>();
     for (String line in lines) {
-      if (line.startsWith("version:")) {
+      if (line.trim().startsWith("version:")) {
         outputLines.add("version: ${_nextMajorVersion}");
       }
       else
