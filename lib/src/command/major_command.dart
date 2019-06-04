@@ -21,6 +21,8 @@ class MajorCommand extends Command<int> {
   @override
   final description = 'Imcrement major version number.';
 
+  Version _nextMajorVersion;
+
   MajorCommand();
 
   @override
@@ -39,29 +41,24 @@ class MajorCommand extends Command<int> {
     final file = new File('test.yaml');
     String contents = await file.readAsString();
     Pubspec currentPubspec = new Pubspec.parse(contents);
-    Version nextMajorVersion = new Version.parse(currentPubspec.version.nextMajor.toString());
-    final YamlMap item = loadYaml(contents);
-    
+    _nextMajorVersion =
+        new Version.parse(currentPubspec.version.nextMajor.toString());
 
-    // Pubspec newPubspec = new Pubspec(
-    //   currentPubspec.name,
-    //   version: nextMajorVersion,
-    //   publishTo: currentPubspec.publishTo,
-    //   author: currentPubspec.author,
-    //   authors: currentPubspec.authors,
-    //   environment: currentPubspec.environment,
-    //   homepage: currentPubspec.homepage,
-    //   repository: currentPubspec.repository,
-    //   issueTracker: currentPubspec.issueTracker,
-    //   documentation: currentPubspec.documentation,
-    //   description: currentPubspec.description,
-    //   dependencies: currentPubspec.dependencies,
-    //   devDependencies: currentPubspec.devDependencies,
-    //   dependencyOverrides: currentPubspec.dependencyOverrides,
-    //   flutter: currentPubspec.flutter,
-    //   );
-    // print(newPubspec.dependencies.toString());
-    // final outputFile = new File('testoutput.yaml');
-    // outputFile.writeAsString(newPubspec.toString());
+    List<String> lines = await file.readAsLines();
+    List<String> outputLines = new List<String>();
+    for (String line in lines) {
+      if (line.startsWith("version:")) {
+        outputLines.add("version: ${_nextMajorVersion}");
+      }
+      else
+      {
+        outputLines.add(line);
+      }
+    }
+
+    String output = outputLines.join("\n");
+
+    final outputFile = new File('test.yaml');
+    await outputFile.writeAsString(output, mode: FileMode.write);
   }
 }
