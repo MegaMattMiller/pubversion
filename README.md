@@ -1,1 +1,50 @@
-# pubversion
+[![Pub Package](https://img.shields.io/pub/v/webdev.svg)](https://pub.dartlang.org/packages/webdev)
+[![Build Status](https://travis-ci.org/dart-lang/webdev.svg?branch=master)](https://travis-ci.org/dart-lang/webdev)
+
+A command-line tool for easily incrementing pubspec.yaml version numbers.
+
+## Installation
+
+`pubversion` is not meant to be used as a dependency. Instead, it should be
+["activated"][activating].
+
+```console
+$ pub global activate pubversion
+# or
+$ flutter pub global activate pubversion
+```
+
+Learn more about activating and using packages [here][pub global].
+
+## Usage
+
+`pubversion` provides three commands:
+
+* `major`
+* `minor`
+* `patch`
+
+### `pubversion major`
+
+```
+> pubversion major
+test_package upgraded from 1.2.1 to 2.0.0
+```
+
+### `pubversion minor`
+
+```
+> pubversion minor
+test_package upgraded from 1.0.1 to 1.1.0
+```
+
+### `pubversion patch`
+
+```
+> pubversion patch
+test_package upgraded from 1.0.0 to 1.0.1
+```
+
+
+[activating]: https://www.dartlang.org/tools/pub/cmd/pub-global#activating-a-package
+[pub global]: https://www.dartlang.org/tools/pub/cmd/pub-global
