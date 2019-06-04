@@ -27,21 +27,21 @@ Learn more about activating and using packages [here][pub global].
 ### `pubversion major`
 
 ```
-> pubversion major
+$ pubversion major
 test_package upgraded from 1.2.1 to 2.0.0
 ```
 
 ### `pubversion minor`
 
 ```
-> pubversion minor
+$ pubversion minor
 test_package upgraded from 1.0.1 to 1.1.0
 ```
 
 ### `pubversion patch`
 
 ```
-> pubversion patch
+$ pubversion patch
 test_package upgraded from 1.0.0 to 1.0.1
 ```
 
