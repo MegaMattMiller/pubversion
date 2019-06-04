@@ -48,6 +48,7 @@ class MinorCommand extends Command<int> {
 
     final outputFile = new File('pubspec.yaml');
     await outputFile.writeAsString(output, mode: FileMode.write);
+    print("${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMinorVersion}");
     return 0;
   }
 }
