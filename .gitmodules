@@ -1,0 +1,3 @@
+[submodule "www/pubversion-www"]
+	path = www/pubversion-www
+	url = https://github.com/MegaMattMiller/pubversion-www.git
