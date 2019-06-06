@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Initial release with all features working.
+
 # 1.0.0-rc.2
 
 - Spelling corrections.
