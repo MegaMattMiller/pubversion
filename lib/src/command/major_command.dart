@@ -4,8 +4,11 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+import '../mixins/message_helper.dart';
 
-class MajorCommand extends Command<int> {
+class MajorCommand extends Command<int> with MessageHelper {
+  MajorCommand();
+  
   @override
   final argParser = ArgParser(usageLineLength: 80);
 
@@ -14,8 +17,6 @@ class MajorCommand extends Command<int> {
 
   @override
   final description = 'Imcrement major version number.';
-
-  MajorCommand();
 
   @override
   Future<int> run() async {
@@ -27,6 +28,8 @@ class MajorCommand extends Command<int> {
           '"${unsupported.join(' ')}".',
           argParser.usage);
     }
+
+    String messageText = getMessageString(argResults);
 
     final file = new File('pubspec.yaml');
     String contents = await file.readAsString();
@@ -50,6 +53,7 @@ class MajorCommand extends Command<int> {
     await outputFile.writeAsString(output, mode: FileMode.write);
     print(
         "${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMajorVersion}");
+    if (messageText.isNotEmpty) print("with message ${messageText}");
     return 0;
   }
 }

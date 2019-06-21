@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Added feature to allow automatic updating of changelogs.
+
 # 1.0.0
 
 - Initial release with all features working.
