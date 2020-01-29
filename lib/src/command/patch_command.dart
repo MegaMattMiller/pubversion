@@ -33,13 +33,13 @@ class PatchCommand extends Command<int> with MessageHelper {
 
     String messageText = getMessageString(argResults);
 
-    final inputPubspecFile = new File('pubspec.yaml');
+    final inputPubspecFile = File('pubspec.yaml');
     String contents = await inputPubspecFile.readAsString();
-    Pubspec currentPubspec = new Pubspec.parse(contents);
+    Pubspec currentPubspec = Pubspec.parse(contents);
     Version nextPatchVersion =
-        new Version.parse(currentPubspec.version.nextPatch.toString());
+        Version.parse(currentPubspec.version.nextPatch.toString());
     List<String> lines = await inputPubspecFile.readAsLines();
-    List<String> outputLines = new List<String>();
+    List<String> outputLines = List<String>();
     for (String line in lines) {
       if (line.startsWith("version:")) {
         outputLines.add("version: ${nextPatchVersion}");
@@ -48,13 +48,13 @@ class PatchCommand extends Command<int> with MessageHelper {
       }
     }
     String output = outputLines.join("\n");
-    final outputPubspecFile = new File('pubspec.yaml');
+    final outputPubspecFile = File('pubspec.yaml');
     await outputPubspecFile.writeAsString(output, mode: FileMode.write);
 
     if (messageText.isNotEmpty) {
-      final inputChagnelogFile = new File('CHANGELOG.md');
+      final inputChagnelogFile = File('CHANGELOG.md');
       List<String> lines = await inputChagnelogFile.readAsLines();
-      List<String> outputLines = new List<String>();
+      List<String> outputLines = List<String>();
       for (String line in lines) {
         outputLines.add(line);
       }
@@ -64,7 +64,7 @@ class PatchCommand extends Command<int> with MessageHelper {
       outputLines.insert(0, "## ${nextPatchVersion}");
       String output = outputLines.join("\n");
       print(output);
-      final outputChangelogFile = new File('CHANGELOG.md');
+      final outputChangelogFile = File('CHANGELOG.md');
       await outputChangelogFile.writeAsString(output, mode: FileMode.write);
     }
 

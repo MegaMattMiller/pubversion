@@ -2,6 +2,10 @@
 
 - Added feature to allow automatic updating of changelogs.
 
+# 1.0.1
+
+- Housekeeping for Dart SDK 2.7.0
+
 # 1.0.0
 
 - Initial release with all features working.
