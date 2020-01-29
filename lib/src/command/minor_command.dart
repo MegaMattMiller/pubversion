@@ -28,14 +28,14 @@ class MinorCommand extends Command<int> {
           argParser.usage);
     }
 
-    final file = new File('pubspec.yaml');
+    final file = File('pubspec.yaml');
     String contents = await file.readAsString();
-    Pubspec currentPubspec = new Pubspec.parse(contents);
+    Pubspec currentPubspec = Pubspec.parse(contents);
     Version nextMinorVersion =
-        new Version.parse(currentPubspec.version.nextMinor.toString());
+        Version.parse(currentPubspec.version.nextMinor.toString());
 
     List<String> lines = await file.readAsLines();
-    List<String> outputLines = new List<String>();
+    List<String> outputLines = List<String>();
     for (String line in lines) {
       if (line.startsWith("version:")) {
         outputLines.add("version: ${nextMinorVersion}");
@@ -46,7 +46,7 @@ class MinorCommand extends Command<int> {
 
     String output = outputLines.join("\n");
 
-    final outputFile = new File('pubspec.yaml');
+    final outputFile = File('pubspec.yaml');
     await outputFile.writeAsString(output, mode: FileMode.write);
     print(
         "${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMinorVersion}");
