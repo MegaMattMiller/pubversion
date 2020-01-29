@@ -8,7 +8,7 @@ import '../mixins/message_helper.dart';
 
 class MajorCommand extends Command<int> with MessageHelper {
   MajorCommand();
-  
+
   @override
   final argParser = ArgParser(usageLineLength: 80);
 
@@ -29,31 +29,31 @@ class MajorCommand extends Command<int> with MessageHelper {
           argParser.usage);
     }
 
-    String messageText = getMessageString(argResults);
+    var messageText = getMessageString(argResults);
 
     final file = File('pubspec.yaml');
-    String contents = await file.readAsString();
-    Pubspec currentPubspec = Pubspec.parse(contents);
-    Version nextMajorVersion =
+    var contents = await file.readAsString();
+    var currentPubspec = Pubspec.parse(contents);
+    var nextMajorVersion =
         Version.parse(currentPubspec.version.nextMajor.toString());
 
-    List<String> lines = await file.readAsLines();
-    List<String> outputLines = List<String>();
-    for (String line in lines) {
-      if (line.startsWith("version:")) {
-        outputLines.add("version: ${nextMajorVersion}");
+    var lines = await file.readAsLines();
+    var outputLines = List<String>();
+    for (var line in lines) {
+      if (line.startsWith('version:')) {
+        outputLines.add('version: ${nextMajorVersion}');
       } else {
         outputLines.add(line);
       }
     }
 
-    String output = outputLines.join("\n");
+    var output = outputLines.join('\n');
 
     final outputFile = File('pubspec.yaml');
     await outputFile.writeAsString(output, mode: FileMode.write);
     print(
-        "${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMajorVersion}");
-    if (messageText.isNotEmpty) print("with message ${messageText}");
+        '${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMajorVersion}');
+    if (messageText.isNotEmpty) print('with message ${messageText}');
     return 0;
   }
 }

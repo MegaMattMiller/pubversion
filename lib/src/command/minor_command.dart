@@ -29,31 +29,31 @@ class MinorCommand extends Command<int> with MessageHelper {
           argParser.usage);
     }
 
-    String messageText = getMessageString(argResults);
+    var messageText = getMessageString(argResults);
 
     final file = File('pubspec.yaml');
-    String contents = await file.readAsString();
-    Pubspec currentPubspec = Pubspec.parse(contents);
-    Version nextMinorVersion =
+    var contents = await file.readAsString();
+    var currentPubspec = Pubspec.parse(contents);
+    var nextMinorVersion =
         Version.parse(currentPubspec.version.nextMinor.toString());
 
-    List<String> lines = await file.readAsLines();
-    List<String> outputLines = List<String>();
-    for (String line in lines) {
-      if (line.startsWith("version:")) {
-        outputLines.add("version: ${nextMinorVersion}");
+    var lines = await file.readAsLines();
+    var outputLines = List<String>();
+    for (var line in lines) {
+      if (line.startsWith('version:')) {
+        outputLines.add('version: ${nextMinorVersion}');
       } else {
         outputLines.add(line);
       }
     }
 
-    String output = outputLines.join("\n");
+    var output = outputLines.join('\n');
 
     final outputFile = File('pubspec.yaml');
     await outputFile.writeAsString(output, mode: FileMode.write);
     print(
-        "${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMinorVersion}");
-    if (messageText.isNotEmpty) print("with message ${messageText}");
+        '${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextMinorVersion}');
+    if (messageText.isNotEmpty) print('with message ${messageText}');
     return 0;
   }
 }

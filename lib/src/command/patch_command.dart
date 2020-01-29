@@ -8,7 +8,7 @@ import '../mixins/message_helper.dart';
 
 class PatchCommand extends Command<int> with MessageHelper {
   PatchCommand() {
-    argParser.addOption("message", abbr: "m", defaultsTo: "");
+    argParser.addOption('message', abbr: 'm', defaultsTo: '');
   }
 
   @override
@@ -31,46 +31,46 @@ class PatchCommand extends Command<int> with MessageHelper {
           argParser.usage);
     }
 
-    String messageText = getMessageString(argResults);
+    var messageText = getMessageString(argResults);
 
     final inputPubspecFile = File('pubspec.yaml');
-    String contents = await inputPubspecFile.readAsString();
-    Pubspec currentPubspec = Pubspec.parse(contents);
-    Version nextPatchVersion =
+    var contents = await inputPubspecFile.readAsString();
+    var currentPubspec = Pubspec.parse(contents);
+    var nextPatchVersion =
         Version.parse(currentPubspec.version.nextPatch.toString());
-    List<String> lines = await inputPubspecFile.readAsLines();
-    List<String> outputLines = List<String>();
-    for (String line in lines) {
-      if (line.startsWith("version:")) {
-        outputLines.add("version: ${nextPatchVersion}");
+    var lines = await inputPubspecFile.readAsLines();
+    var outputLines = List<String>();
+    for (var line in lines) {
+      if (line.startsWith('version:')) {
+        outputLines.add('version: ${nextPatchVersion}');
       } else {
         outputLines.add(line);
       }
     }
-    String output = outputLines.join("\n");
+    var output = outputLines.join('\n');
     final outputPubspecFile = File('pubspec.yaml');
     await outputPubspecFile.writeAsString(output, mode: FileMode.write);
 
     if (messageText.isNotEmpty) {
       final inputChagnelogFile = File('CHANGELOG.md');
-      List<String> lines = await inputChagnelogFile.readAsLines();
-      List<String> outputLines = List<String>();
-      for (String line in lines) {
+      var lines = await inputChagnelogFile.readAsLines();
+      var outputLines = List<String>();
+      for (var line in lines) {
         outputLines.add(line);
       }
-      outputLines.insert(0, "");
-      outputLines.insert(0, "- ${messageText}");
-      outputLines.insert(0, "");
-      outputLines.insert(0, "## ${nextPatchVersion}");
-      String output = outputLines.join("\n");
+      outputLines.insert(0, '');
+      outputLines.insert(0, '- ${messageText}');
+      outputLines.insert(0, '');
+      outputLines.insert(0, '## ${nextPatchVersion}');
+      var output = outputLines.join('\n');
       print(output);
       final outputChangelogFile = File('CHANGELOG.md');
       await outputChangelogFile.writeAsString(output, mode: FileMode.write);
     }
 
     print(
-        "${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextPatchVersion}");
-    if (messageText.isNotEmpty) print("with message ${messageText}");
+        '${currentPubspec.name} upgraded from ${currentPubspec.version} to ${nextPatchVersion}');
+    if (messageText.isNotEmpty) print('with message ${messageText}');
     //TODO: write message to CHANGELOG.md.
     return 0;
   }
